@@ -33,7 +33,6 @@ while True:
     element = driver.find_element(By.CSS_SELECTOR, """.rpm2j7zs > div:nth-child(1) > div:nth-child(""" + str(
         i) + """) > a:nth-child(1) > div:nth-child(1)""")
     element.click()
-
     # ------------------------if block------------------------
     # ex_el = driver.find_element(By.CSS_SELECTOR)
     # try:
@@ -42,16 +41,11 @@ while True:
     # except:
     #     print("Spam Block Not Found")
     # ------------------------if block------------------------
-    # start add post
     time.sleep(1)
+    # start add post
     input_post = driver.find_element(By.CSS_SELECTOR,
                                      """div.h676nmdw:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)""")
     input_post.click()
-    # try:
-    #     element = driver.find_element(By.CSS_SELECTOR, """div.t63ysoy8:nth-child(3) > div:nth-child(1) > div:nth-child(1)""")
-    #     element.click()
-    # except:
-    #     print("Requirements not Found")
     # show theme
     time.sleep(3)
     input_post = driver.find_element(By.CSS_SELECTOR, """span.hop8lmos > img:nth-child(1)""")
