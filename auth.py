@@ -1,2 +1,2 @@
-login = "your login"
-password = "your password"
+login = "niknk71576@gmail.com"
+password = "Nl753456nl"
