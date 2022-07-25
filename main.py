@@ -1,23 +1,31 @@
-from post import text, enter, tab
 import random
 from auth import login, password
 
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
-from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.chrome.options import Options
 import time
+
+from post import text, enter, tab
 
 options = Options()
 
-options.headless = True
+options.add_argument("--disable-infobars")
+options.add_argument("start-maximized")
+options.add_argument("--disable-extensions")
+options.add_experimental_option(
+    "prefs", {"profile.default_content_setting_values.notifications": 1}
+)
+options.headless = False
 
-driver = webdriver.Firefox()
+driver = webdriver.chrome.webdriver.WebDriver(options=options, executable_path='C:\webdrivers\chromedriver.exe')
 driver.get("https://www.facebook.com")
-assert "Facebook - log in or sign up" in driver.title
+driver.maximize_window()
+
 print("Start Facebook.com")
 time.sleep(1)
-element = driver.find_element(By.XPATH, """//button[@title="Allow essential and optional cookies"]""")
+element = driver.find_element(By.XPATH, """//*[@title="Дозволити основні та необов'язкові файли cookie"]""")
 element.click()
 print("Done!")
 
@@ -47,41 +55,34 @@ while True:
         i + 4) + """) > a:nth-child(1) > div:nth-child(1)""")
     element.click()
     print("Done!")
-    # ------------------------if block------------------------
-    # ex_el = driver.find_element(By.CSS_SELECTOR)
-    # try:
-    #     element = driver.find_element(By.CSS_SELECTOR,"""div.gjzvkazv:nth-child(1) > div:nth-child(1) > div:nth-child(1)""")
-    #     element.click()
-    # except:
-    #     print("Spam Block Not Found")
-    # ------------------------if block------------------------
+
     print("Start add post")
     sleep = random.randint(2, 7)
     time.sleep(sleep)
     input_post = driver.find_element(By.CSS_SELECTOR,
                                      """div.h676nmdw:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)""")
     input_post.click()
-    print("Done!")
     sleep = random.randint(2, 7)
     time.sleep(sleep)
+    print("Done!")
+
+    # print("Image input")
+    action = ActionChains(driver)
+    # action.send_keys("""![](BKM.png)""")
+    # action.perform()
+    #
+    # sleep = random.randint(2, 3)
+    # time.sleep(sleep)
+    # print("Done!")
 
     print("Text input")
-    action = ActionChains(driver)
     action.send_keys(text)
     action.perform()
+    sleep = random.randint(2, 7)
+    time.sleep(sleep)
     print("Done!")
-    sleep = random.randint(2, 3)
+
     time.sleep(sleep)
-    print("Image input")
-    img = driver.find_element(By.CSS_SELECTOR,
-                              """div.dwxx2s2f:nth-child(1) > div:nth-child(1) > span:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > i:nth-child(1)""")
-    img.send_keys(
-        '/home/skivel/PycharmProjects/Selenium-bot/BKM.png')
-    img.click()
-    time.sleep(sleep)
-    driver.find_element(By.CSS_SELECTOR,
-                        '.ic9r50nj > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > i:nth-child(1)').send_keys(
-        '/home/skivel/PycharmProjects/Selenium-bot/BKM.png')
     sleep = random.randint(2, 3)
     time.sleep(sleep)
     print("Done!")
